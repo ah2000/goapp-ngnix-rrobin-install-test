@@ -14,12 +14,14 @@ end webserver will be configued to use that number.
 
 This is a modification of the scripts written by Mark Thompson 
 https://github.com/thompsm/devops_test 
-With modifications 
-1) in that the ngnix configuration template was corrected to ensure forwarding of headers
 
-2) the recipies names and variables were renamed for better convention
+With modifications:
 
-3) the ip address 10.10.10.100 base hard coding was removed
+1) the ip address 10.10.10.100 base hard coding was removed
+
+2) in that the ngnix configuration template was corrected to ensure forwarding of headers
+
+
 
 ## Requirements
 * ChefDK 0.12.0
