@@ -1,6 +1,6 @@
 upstream backend {
-    <% 1.upto(node['devops_test']['num_of_app_servers']) do |i| -%>
-    server 10.0.10.10<%= i %>:8484;
+    <% 1.upto(node['vagrant-deploy-goapp-ngnix']['num_of_app_servers']) do |i| -%>
+    server <%= "#{node['vagrant-deploy-goapp-ngnix']['base_ip_prefix']}%d" % (node['vagrant-deploy-goapp-ngnix']['base_ip_address'] + i) %>:8484;
   	<% end -%>
 }
 server {
