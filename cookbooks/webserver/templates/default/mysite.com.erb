@@ -1,0 +1,10 @@
+upstream backend {
+    <% 1.upto(node['devops_test']['num_of_app_servers']) do |i| -%>
+    server 10.0.10.10<%= i %>:8484;
+  	<% end -%>
+}
+server {
+    location / {
+        proxy_pass http://backend;
+    }
+}
