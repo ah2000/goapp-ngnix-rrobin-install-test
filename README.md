@@ -1,4 +1,4 @@
-# devops_test
+# vagrant-deploy-go-app-ngnix
 
 ## Scope
 This project uses Chef Provisioning and Chef local to deploy the following:
@@ -12,22 +12,29 @@ It will then:
 The number of backend application servers can be specified, and the front
 end webserver will be configued to use that number.
 
-No community cookbooks are used to deliberately keep things simple
+This is a modification of the scripts written by Mark Thompson 
+https://github.com/thompsm/devops_test 
+With modifications 
+1) in that the ngnix configuration template was corrected to ensure forwarding of headers
+
+2) the recipies names and variables were renamed for better convention
+
+3) the ip address 10.10.10.100 base hard coding was removed
 
 ## Requirements
-* ChefDK 0.9.0
-* Vagrant 1.7.4
+* ChefDK 0.12.0
+* Vagrant 1.8.1
 * Direct internet connection
-* VirtualBox 4.3.28
+* VirtualBox 5.0.16
 
 ## Platform
 * Ubuntu Precise
 
 ## Usage
-To deploy the service, ensure you are in the devopts_test project diretcory
+To deploy the service, ensure you are in the goapp-ngnix-rrobin-install-test project diretcory
 and run the following command:
 
-chef-client --minimal-ohai -z devops_test.rb
+chef-client --minimal-ohai -z vagrant-deploy-goapp-ngnix.rb
 
 Once deployed, you can test it by opening a web browser (Firefox for example)
 and then going to the following URL:
@@ -40,14 +47,14 @@ Hi there, I'm served from appserver1!
 
 If you reload the page, you should see the reponse from the second app server.
 
-## TODO
+
 
 
 ## License and Author
 
-* Author: Mark Thompson (<m_thompson@ntlworld.com>)
+* Author: Amir Hasan (<ah2000@gmail.com>)
 
-Copyright: 2015, Mark Thompson
+Copyright: 2015, Amir Hasan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
