@@ -25,8 +25,9 @@ machine_batch do
   # Create appserver machines
   1.upto(num_appservers) do |i|
     machine "appserver#{i}" do
+      appserver_ip_address = baseip_prefix.join(baseip_address+i)
       # Tell the vagrant driver to add a private network address to give each machine a unique IP
-      add_machine_options :vagrant_config => ["config.vm.network \"private_network\", ip: #{baseip_prefix}#{baseip_address+i}\""].join("\n")
+      add_machine_options :vagrant_config => ["config.vm.network \"private_network\", ip: \"#{appserver_ip_address}\""].join("\n")
 
       # Define which Chef cookbook we want to run on the box
       # appserver will compile a Go file and then run it to respond to an http request
@@ -38,7 +39,8 @@ machine_batch do
   machine 'webserver' do
     # Tell the vagrant driver to add a private network address to give the machine a unique IP
     # and to define a port forward so we can test the app
-    add_machine_options :vagrant_config => ['config.vm.network "private_network", ip: #{baseip_prefix}#{baseip_address}', 'config.vm.network :forwarded_port, guest: 80, host: 8080'].join("\n")
+    webserver_ip_address = baseip_prefix.join(baseip_address)
+    add_machine_options :vagrant_config => ['config.vm.network "private_network", ip: "#{webserver_ip_address}"', 'config.vm.network :forwarded_port, guest: 80, host: 8080'].join("\n")
 
     # Pass an attribute to the webserver cookbook to to tell it how many app servers we will provision
     attribute ['vagrant-deploy-goapp-ngnix', 'num_of_app_servers'], num_appservers
